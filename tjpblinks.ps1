@@ -59,16 +59,16 @@ $links = @(
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
 )
 
-# Criação dos botões com eventos corrigidos
+# Criação dos botões com eventos fixos usando closure correta
 foreach ($link in $links) {
+    $url = $link.Url
     $button = New-Object System.Windows.Forms.Button
     $button.Text = $link.Name
     $button.Size = New-Object System.Drawing.Size(360, 30)
     $button.Margin = New-Object System.Windows.Forms.Padding(5)
-    $button.Tag = $link.Url
 
-    $button.Add_Click([System.EventHandler]{
-        Start-Process ($_.Source.Tag)
+    $button.Add_Click({
+        Start-Process $url
     })
 
     $panel.Controls.Add($button)
