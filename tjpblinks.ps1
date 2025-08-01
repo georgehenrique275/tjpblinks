@@ -31,25 +31,22 @@ if (-not (Test-Path $shortcutPath)) {
     Write-Host "O atalho já existe. Nenhuma ação necessária."
 }
 
-# Load required assemblies for WinForms
+# Carregar bibliotecas do WinForms e Drawing
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Create the form
+# Criar a janela
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "TJPB Links"
 $form.Size = New-Object System.Drawing.Size(400, 600)
 $form.StartPosition = "CenterScreen"
 
-# Create a panel for buttons
-$panel = New-Object System.Windows.Forms.FlowLayoutPanel
-$panel.Dock = "Fill"
-$panel.AutoScroll = $true
-$panel.FlowDirection = "TopDown"
-$panel.WrapContents = $false
-$panel.Padding = New-Object System.Windows.Forms.Padding(10)
+# Ícone de notificação para balão
+$notifyIcon = New-Object System.Windows.Forms.NotifyIcon
+$notifyIcon.Icon = [System.Drawing.SystemIcons]::Information
+$notifyIcon.Visible = $true
 
-# Define the links and their display names
+# Lista de links (adicione os que quiser)
 $links = @(
     @{ Name = "Remoto TJPB"; Url = "https://tiny.cc/remototjpb" },
     @{ Name = "Digitaliza PJE"; Url = "https://tiny.cc/DigitalizaPJE" },
@@ -93,19 +90,89 @@ $links = @(
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
 )
 
-# Create buttons for each link
-foreach ($link in $links) {
-    $button = New-Object System.Windows.Forms.Button
-    $button.Text = $link.Name
-    $button.Size = New-Object System.Drawing.Size(360, 30)
-    $button.Margin = New-Object System.Windows.Forms.Padding(5)
-    $button.Tag = $link.Url
-    $button.Add_Click({ Start-Process $this.Tag })
-    $panel.Controls.Add($button)
+# Caixa de texto para pesquisa
+$searchBox = New-Object System.Windows.Forms.TextBox
+$searchBox.Dock = "Top"
+$searchBox.Margin = '10,10,10,5'
+$searchBox.Font = New-Object System.Drawing.Font("Segoe UI", 10)
+$searchBox.Text = "Pesquisar..."
+$searchBox.ForeColor = [System.Drawing.Color]::Gray
+
+# Simular placeholder
+$searchBox.Add_GotFocus({
+    if ($searchBox.Text -eq "Pesquisar...") {
+        $searchBox.Text = ""
+        $searchBox.ForeColor = [System.Drawing.Color]::Black
+    }
+})
+
+$searchBox.Add_LostFocus({
+    if ([string]::IsNullOrWhiteSpace($searchBox.Text)) {
+        $searchBox.Text = "Pesquisar..."
+        $searchBox.ForeColor = [System.Drawing.Color]::Gray
+    }
+})
+
+# Painel de botões
+$panel = New-Object System.Windows.Forms.FlowLayoutPanel
+$panel.Dock = "Fill"
+$panel.AutoScroll = $true
+$panel.FlowDirection = "TopDown"
+$panel.WrapContents = $false
+$panel.Padding = New-Object System.Windows.Forms.Padding(10)
+
+# Lista de botões
+$allButtons = New-Object System.Collections.Generic.List[System.Windows.Forms.Button]
+
+function Load-Buttons($filter = "") {
+    $panel.Controls.Clear()
+    $allButtons.Clear()
+
+    foreach ($link in $links) {
+        if ($link.Name -like "*$filter*") {
+            $button = New-Object System.Windows.Forms.Button
+            $button.Text = $link.Name
+            $button.Size = New-Object System.Drawing.Size(360, 30)
+            $button.Margin = New-Object System.Windows.Forms.Padding(5)
+            $button.Tag = $link.Url
+
+            # Handle both left and right clicks
+            $button.Add_MouseDown({
+                param($sender, $e)
+                if ($e.Button -eq [System.Windows.Forms.MouseButtons]::Left) {
+                    # Left-click: Copy to clipboard
+                    [System.Windows.Forms.Clipboard]::SetText($this.Tag)
+                    $notifyIcon.BalloonTipTitle = "Link copiado"
+                    $notifyIcon.BalloonTipText = "O link foi copiado para a área de transferência."
+                    $notifyIcon.ShowBalloonTip(1500)
+                }
+                elseif ($e.Button -eq [System.Windows.Forms.MouseButtons]::Right) {
+                    # Right-click: Open in default browser
+                    Start-Process $this.Tag
+                    $notifyIcon.BalloonTipTitle = "Link aberto"
+                    $notifyIcon.BalloonTipText = "O link foi aberto no navegador padrão."
+                    $notifyIcon.ShowBalloonTip(1500)
+                }
+            })
+
+            $panel.Controls.Add($button)
+            $allButtons.Add($button)
+        }
+    }
 }
 
-# Add panel to form
-$form.Controls.Add($panel)
+# Atualizar ao digitar
+$searchBox.Add_TextChanged({
+    $filter = $searchBox.Text.Trim()
+    if ($filter -eq "Pesquisar...") { $filter = "" }
+    Load-Buttons -filter $filter
+})
 
-# Show the form
+# Montar janela
+Load-Buttons
+$form.Controls.Add($panel)
+$form.Controls.Add($searchBox)
+
+# Mostrar
 $form.ShowDialog()
+$notifyIcon.Dispose()
