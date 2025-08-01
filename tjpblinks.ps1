@@ -1,25 +1,46 @@
-# Define paths
-$vbsPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "RunTJPBLinks.vbs")
-$shortcutPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "TJPB Links.lnk")
+# Caminhos padrão
+$desktop = [Environment]::GetFolderPath("Desktop")
+$vbsPath = Join-Path $desktop "RunTJPBLinks.vbs"
+$shortcutPath = Join-Path $desktop "TJPB Links.lnk"
+$iconUrl = "https://raw.githubusercontent.com/georgehenrique275/tjpblinksico/refs/heads/main/icons8-link-94.ico"
+$iconPath = "$env:TEMP\tjpblinks.ico"
 
-# Create VBScript to run PowerShell command silently
+# Baixar o ícone se ainda não estiver salvo
+if (-not (Test-Path $iconPath)) {
+    try {
+        Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath -UseBasicParsing
+    } catch {
+        Write-Host "Erro ao baixar o ícone do GitHub." -ForegroundColor Red
+    }
+}
+
+# Criar VBS para executar PowerShell em modo oculto
 $vbsContent = @"
 Set WShell = CreateObject("WScript.Shell")
 WShell.Run "powershell.exe -ExecutionPolicy Bypass -Command ""irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex""", 0
 "@
+
 if (-not (Test-Path $vbsPath)) {
     $vbsContent | Out-File -FilePath $vbsPath -Encoding ASCII
+    Write-Host "Arquivo VBS criado: $vbsPath"
 }
 
-# Create shortcut to VBScript
+# Criar atalho no desktop apontando para o VBS
 if (-not (Test-Path $shortcutPath)) {
     $WShell = New-Object -ComObject WScript.Shell
     $shortcut = $WShell.CreateShortcut($shortcutPath)
     $shortcut.TargetPath = "wscript.exe"
     $shortcut.Arguments = "`"$vbsPath`""
-    $shortcut.Description = "Shortcut to TJPB Links WinForms Application from GitHub"
+    $shortcut.Description = "TJPB Links - Aplicação WinForms"
+    if (Test-Path $iconPath) {
+        $shortcut.IconLocation = $iconPath
+    }
     $shortcut.Save()
+    Write-Host "Atalho criado na área de trabalho: TJPB Links.lnk"
+} else {
+    Write-Host "O atalho já existe. Nenhuma ação necessária."
 }
+
 
 # Load required assemblies for WinForms
 Add-Type -AssemblyName System.Windows.Forms
