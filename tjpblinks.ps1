@@ -88,7 +88,7 @@ $links = @(
     @{ Name = "Status Sistemas TJPB"; Url = "https://statusdesistemas.tjpb.jus.br/status/sistemastjpb" },
     @{ Name = "VPN TJPB"; Url = "https://tiny.cc/VPNTJPB" },
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
-    @{ Name = "VAgent"; Url = "https://valid-websocket.s3.amazonaws.com/installer/VAgent-Certificadora-Cliente-Installer_x64_2.0.5.exe"
+    @{ Name = "VAgent"; Url = "https://valid-websocket.s3.amazonaws.com/installer/VAgent-Certificadora-Cliente-Installer_x64_2.0.5.exe" }
 )
 
 # Caixa de texto para pesquisa
