@@ -1,6 +1,6 @@
 # Caminhos padrão
 $desktop = [Environment]::GetFolderPath("Desktop")
-$vbsPath = Join-Path $desktop "RunTJPBLinks.vbs"
+$vbsPath = Join-Path $desktop "powershell.exe -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex""
 $shortcutPath = Join-Path $desktop "TJPB Links.lnk"
 $iconUrl = "https://raw.githubusercontent.com/georgehenrique275/tjpblinksico/refs/heads/main/icons8-link-94.ico"
 $iconPath = "$env:TEMP\tjpblinks.ico"
