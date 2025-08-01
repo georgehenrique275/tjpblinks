@@ -1,6 +1,5 @@
-# Caminhos padrão
+# Caminho padrão do desktop
 $desktop = [Environment]::GetFolderPath("Desktop")
-$vbsPath = Join-Path $desktop "RunTJPBLinks.vbs"
 $shortcutPath = Join-Path $desktop "TJPB Links.lnk"
 $iconUrl = "https://raw.githubusercontent.com/georgehenrique275/tjpblinksico/refs/heads/main/icons8-link-94.ico"
 $iconPath = "$env:TEMP\tjpblinks.ico"
@@ -14,33 +13,23 @@ if (-not (Test-Path $iconPath)) {
     }
 }
 
-# Criar VBS para executar PowerShell em modo oculto
-$vbsContent = @"
-Set WShell = CreateObject("WScript.Shell")
-WShell.Run "powershell.exe -ExecutionPolicy Bypass -Command ""irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex""", 0
-"@
-
-if (-not (Test-Path $vbsPath)) {
-    $vbsContent | Out-File -FilePath $vbsPath -Encoding ASCII
-    Write-Host "Arquivo VBS criado: $vbsPath"
-}
-
-# Criar atalho no desktop apontando para o VBS
+# Criar atalho diretamente para o PowerShell com comando remoto
 if (-not (Test-Path $shortcutPath)) {
-    $WShell = New-Object -ComObject WScript.Shell
-    $shortcut = $WShell.CreateShortcut($shortcutPath)
-    $shortcut.TargetPath = "wscript.exe"
-    $shortcut.Arguments = "`"$vbsPath`""
+    $WshShell = New-Object -ComObject WScript.Shell
+    $shortcut = $WshShell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = "$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe"
+    $shortcut.Arguments = '-WindowStyle Hidden -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex"'
     $shortcut.Description = "TJPB Links - Aplicação WinForms"
+    
     if (Test-Path $iconPath) {
         $shortcut.IconLocation = $iconPath
     }
+    
     $shortcut.Save()
     Write-Host "Atalho criado na área de trabalho: TJPB Links.lnk"
 } else {
     Write-Host "O atalho já existe. Nenhuma ação necessária."
 }
-
 
 # Load required assemblies for WinForms
 Add-Type -AssemblyName System.Windows.Forms
