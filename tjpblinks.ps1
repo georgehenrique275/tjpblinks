@@ -1,13 +1,28 @@
+# Shortcut creation
+$shortcutPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "TJPB Links.lnk")
+$powershellPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+
+# Check if shortcut already exists
+if (-not (Test-Path $shortcutPath)) {
+    $WShell = New-Object -ComObject WScript.Shell
+    $shortcut = $WShell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = $powershellPath
+    $shortcut.Arguments = '-ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex"'
+    $shortcut.Description = "Shortcut to TJPB Links WinForms Application from GitHub"
+    $shortcut.Save()
+}
+
+# Load required assemblies for WinForms
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Cria o formulário
+# Create the form
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "TJPB Links"
 $form.Size = New-Object System.Drawing.Size(400, 600)
 $form.StartPosition = "CenterScreen"
 
-# Cria o painel para os botões
+# Create a panel for buttons
 $panel = New-Object System.Windows.Forms.FlowLayoutPanel
 $panel.Dock = "Fill"
 $panel.AutoScroll = $true
@@ -15,7 +30,7 @@ $panel.FlowDirection = "TopDown"
 $panel.WrapContents = $false
 $panel.Padding = New-Object System.Windows.Forms.Padding(10)
 
-# Lista de links
+# Define the links and their display names
 $links = @(
     @{ Name = "Remoto TJPB"; Url = "https://tiny.cc/remototjpb" },
     @{ Name = "Digitaliza PJE"; Url = "https://tiny.cc/DigitalizaPJE" },
@@ -59,23 +74,19 @@ $links = @(
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
 )
 
-# Criação dos botões com eventos fixos usando closure correta
+# Create buttons for each link
 foreach ($link in $links) {
-    $url = $link.Url
     $button = New-Object System.Windows.Forms.Button
     $button.Text = $link.Name
     $button.Size = New-Object System.Drawing.Size(360, 30)
     $button.Margin = New-Object System.Windows.Forms.Padding(5)
-
-    $button.Add_Click({
-        Start-Process $url
-    })
-
+    $button.Tag = $link.Url
+    $button.Add_Click({ Start-Process $this.Tag })
     $panel.Controls.Add($button)
 }
 
-# Adiciona o painel ao formulário
+# Add panel to form
 $form.Controls.Add($panel)
 
-# Exibe a janela
+# Show the form
 $form.ShowDialog()
