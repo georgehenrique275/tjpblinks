@@ -1,4 +1,8 @@
-# Shortcut creation
+$ErrorActionPreference = "SilentlyContinue"
+
+# Oculta console
+Hide-Console
+
 $shortcutPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "TJPB Links.lnk")
 $powershellPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
 
