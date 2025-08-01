@@ -1,17 +1,22 @@
-$ErrorActionPreference = "SilentlyContinue"
-
-# Oculta console
-Hide-Console
-
+# Define paths
+$vbsPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "RunTJPBLinks.vbs")
 $shortcutPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "TJPB Links.lnk")
-$powershellPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
 
-# Check if shortcut already exists
+# Create VBScript to run PowerShell command silently
+$vbsContent = @"
+Set WShell = CreateObject("WScript.Shell")
+WShell.Run "powershell.exe -ExecutionPolicy Bypass -Command ""irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex""", 0
+"@
+if (-not (Test-Path $vbsPath)) {
+    $vbsContent | Out-File -FilePath $vbsPath -Encoding ASCII
+}
+
+# Create shortcut to VBScript
 if (-not (Test-Path $shortcutPath)) {
     $WShell = New-Object -ComObject WScript.Shell
     $shortcut = $WShell.CreateShortcut($shortcutPath)
-    $shortcut.TargetPath = $powershellPath
-    $shortcut.Arguments = '-ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/georgehenrique275/tjpblinks/refs/heads/main/tjpblinks.ps1 | iex"'
+    $shortcut.TargetPath = "wscript.exe"
+    $shortcut.Arguments = "`"$vbsPath`""
     $shortcut.Description = "Shortcut to TJPB Links WinForms Application from GitHub"
     $shortcut.Save()
 }
