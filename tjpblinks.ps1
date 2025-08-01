@@ -1,13 +1,13 @@
-﻿Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Create the form
+# Cria o formulário
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "TJPB Links"
 $form.Size = New-Object System.Drawing.Size(400, 600)
 $form.StartPosition = "CenterScreen"
 
-# Create a panel for buttons
+# Cria o painel para os botões
 $panel = New-Object System.Windows.Forms.FlowLayoutPanel
 $panel.Dock = "Fill"
 $panel.AutoScroll = $true
@@ -15,7 +15,7 @@ $panel.FlowDirection = "TopDown"
 $panel.WrapContents = $false
 $panel.Padding = New-Object System.Windows.Forms.Padding(10)
 
-# Define the links and their display names
+# Lista de links
 $links = @(
     @{ Name = "Remoto TJPB"; Url = "https://tiny.cc/remototjpb" },
     @{ Name = "Digitaliza PJE"; Url = "https://tiny.cc/DigitalizaPJE" },
@@ -59,19 +59,23 @@ $links = @(
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
 )
 
-# Create buttons for each link
+# Criação dos botões com eventos corrigidos
 foreach ($link in $links) {
     $button = New-Object System.Windows.Forms.Button
     $button.Text = $link.Name
     $button.Size = New-Object System.Drawing.Size(360, 30)
     $button.Margin = New-Object System.Windows.Forms.Padding(5)
     $button.Tag = $link.Url
-    $button.Add_Click({ Start-Process $this.Tag })
+
+    $button.Add_Click([System.EventHandler]{
+        Start-Process ($_.Source.Tag)
+    })
+
     $panel.Controls.Add($button)
 }
 
-# Add panel to form
+# Adiciona o painel ao formulário
 $form.Controls.Add($panel)
 
-# Show the form
+# Exibe a janela
 $form.ShowDialog()
