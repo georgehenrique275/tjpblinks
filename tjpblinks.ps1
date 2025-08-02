@@ -86,8 +86,8 @@ $links = @(
     @{ Name = "JD TRF5"; Url = "http://jd.trf5.jus.br/jd/login.wsp" },
     @{ Name = "SAO PJE Reports"; Url = "https://reports.tjpb.jus.br/saopje/index.jsp" },
     @{ Name = "Status Sistemas TJPB"; Url = "https://statusdesistemas.tjpb.jus.br/status/sistemastjpb" },
-    @{ Name = "VPN 7.4"; Url = "https://links.fortinet.com/forticlient/win/vpnagent" },
     @{ Name = "VPN 7.2"; Url = "https://drive.google.com/file/d/1yYQAmKMkiLJ5_nBZv-hCTJUsfmhdVAsE/view?usp=sharing " },
+    @{ Name = "VPN 7.4"; Url = "https://links.fortinet.com/forticlient/win/vpnagent" },
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
     @{ Name = "VAgent"; Url = "https://valid-websocket.s3.amazonaws.com/installer/VAgent-Certificadora-Cliente-Installer_x64_2.0.5.exe" }
 )
@@ -178,5 +178,6 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
