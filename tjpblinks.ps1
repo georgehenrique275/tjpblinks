@@ -60,6 +60,8 @@ $links = @(
     @{ Name = "Movie Maker TJPB"; Url = "https://tiny.cc/MovieMakerTJPB" },
     @{ Name = "My MP4 Box TJPB"; Url = "https://tiny.cc/MyMp4BoxTJPB" },
     @{ Name = "PJE Mídias TJPB"; Url = "https://tiny.cc/PJEMidiasTJPB" },
+    @{ Name = "Revo Uninstall"; Url = "https://portableapps.com/redir2/?a=RevoUninstallerPortable&s=s&d=pa&f=RevoUninstallerPortable_2.5.8.paf.exe" },
+    @{ Name = "Safenet 10.3";   Url = "https://s3-sa-east-1.amazonaws.com/shared-www.validcertificadora.com.br/Downloads/Safenet/Safenet+-x64-10.3.msi" },
     @{ Name = "Google Drive File"; Url = "https://drive.google.com/file/d/1e2I64Ob0gGlIWs9KHbeQhUtRXmPkHK_c/view?usp=drive_link" },
     @{ Name = "PJE Office TRF3"; Url = "https://pjeoffice.trf3.jus.br/" },
     @{ Name = "STI TJPB"; Url = "https://tiny.cc/STITJPB" },
@@ -182,6 +184,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
