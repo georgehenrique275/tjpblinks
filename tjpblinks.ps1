@@ -91,7 +91,9 @@ $links = @(
     @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" }
     @{ Name = "VAgent"; Url = "https://valid-websocket.s3.amazonaws.com/installer/VAgent-Certificadora-Cliente-Installer_x64_2.0.5.exe" }
     @{ Name = "Reset de Senha Guacamole"; Url = "https://trocasenha.tjpb.jus.br/guacamole" }
-     @{ Name = "Reset de Senha Formulario"; Url = "https://script.google.com/a/macros/tjpb.jus.br/s/AKfycbx-ghGNC2HWZ6rCPO7eWSl-nFDwKNZyKqwuL7QPeYNZzQPgzJndBLjrxMyJH0EEoX8jjQ/exec" }
+    @{ Name = "Reset de Senha Formulario"; Url = "https://script.google.com/a/macros/tjpb.jus.br/s/AKfycbx-ghGNC2HWZ6rCPO7eWSl-nFDwKNZyKqwuL7QPeYNZzQPgzJndBLjrxMyJH0EEoX8jjQ/exec" }
+    @{ Name = "LibreOffice 25.2.5"; Url = "https://pt-br.libreoffice.org/donate/dl/win-x86_64/25.2.5/pt-BR/LibreOffice_25.2.5_Win_x86-64.msi" }
+    @{ Name = "Impressora Virtual"; Url = "\\srv02-print.tjpb.jus.br\Publico\" }
 )
 
 # Caixa de texto para pesquisa
@@ -180,6 +182,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
