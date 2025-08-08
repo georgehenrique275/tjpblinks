@@ -98,7 +98,7 @@ $links = @(
     @{ Name = "LibreOffice 25.2.5"; Url = "https://pt-br.libreoffice.org/donate/dl/win-x86_64/25.2.5/pt-BR/LibreOffice_25.2.5_Win_x86-64.msi" },
     @{ Name = "Impressora Virtual"; Url = "\\srv02-print.tjpb.jus.br\Publico\" },
     @{ Name = "Instalador Pje Midias"; Url = 'powershell.exe -ExecutionPolicy Bypass -Command "irm ''https://raw.githubusercontent.com/georgehenrique275/script-pjeMidias/refs/heads/main/Sistema%20PJE-MIDIAS.ps1'' | iex"' }
-
+    @{ Name = "Instalador BRBJUS"; Url = 'powershell.exe -ExecutionPolicy Bypass -Command "irm ''https://raw.githubusercontent.com/georgehenrique275/BRB/refs/heads/main/BRB.PS1'' | iex"' },
 )
 
 # Caixa de texto para pesquisa
@@ -187,6 +187,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
