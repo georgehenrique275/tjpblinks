@@ -48,7 +48,7 @@ $notifyIcon.Visible = $true
 
 # Lista de links (adicione os que quiser)
 $links = @(
- @{ Name = "ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" },
+ 
 @{ Name = "Canon Maxify GX7010"; Url = "https://www.cla.canon.com/cla/en/consumer/products/printers_multifunction/refill_built_in_ink_tank/maxify_gx7010#driversAndSoftwareTab" },
 @{ Name = "Canon Support"; Url = "https://sg.canon/en/support/0101103903" },
 @{ Name = "Certisign Desktop ID"; Url = "https://www.certisign.com.br/duvidas-suporte/downloads/desktopid" },
@@ -89,6 +89,7 @@ $links = @(
 @{ Name = "SAO PJE Reports"; Url = "https://reports.tjpb.jus.br/saopje/index.jsp" },
 @{ Name = "Sistema Precatorios"; Url = "https://precatorios.tjpb.jus.br/guacamole/#/" },
 @{ Name = "Sistemas JUD"; Url = "https://tiny.cc/SistemasJUD" },
+@{ Name = "Sistema ASI Index"; Url = "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" },
 @{ Name = "Soluti Suporte A3"; Url = "https://soluti.com.br/duvidas-e-suporte/suporte-certificado-a3/" },
 @{ Name = "Status Sistemas TJPB"; Url = "https://statusdesistemas.tjpb.jus.br/status/sistemastjpb" },
 @{ Name = "STI TJPB"; Url = "https://tiny.cc/STITJPB" },
@@ -189,6 +190,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
