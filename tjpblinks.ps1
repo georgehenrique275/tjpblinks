@@ -78,7 +78,7 @@ $links = @(
     @{ Name = "Token EPASS2003 TJPB"; Url = "https://tiny.cc/TokenEPASS2003TJPB" },
     @{ Name = "Epass Admin TJPB"; Url = "https://tiny.cc/EpassAdminTJPB" },
     @{ Name = "Token GD Old"; Url = "http://tiny.cc/TokenGDold" },
-    @{ Name = "Precatorio"; Url = "https://precatorios.tjpb.jus.br/guacamole/#/" },
+    @{ Name = "Precatorios"; Url = "https://precatorios.tjpb.jus.br/guacamole/#/" },
     @{ Name = "Certisign Desktop ID"; Url = "https://www.certisign.com.br/duvidas-suporte/downloads/desktopid" },
     @{ Name = "Token Safenet x32 TJPB"; Url = "https://tiny.cc/TokenSafenetx32TJPB" },
     @{ Name = "Token Safenet x64 TJPB"; Url = "https://tiny.cc/TokenSafenetx64TJPB" },
@@ -189,6 +189,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
