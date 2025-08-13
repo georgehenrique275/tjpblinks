@@ -49,7 +49,7 @@ $notifyIcon.Visible = $true
 # Lista de links (adicione os que quiser)
 $links = @(
  
-@{ Name = "Canon Maxify GX7010"; Url = "https://www.cla.canon.com/cla/en/consumer/products/printers_multifunction/refill_built_in_ink_tank/maxify_gx7010#driversAndSoftwareTab" },
+
 @{ Name = "Canon Support"; Url = "https://sg.canon/en/support/0101103903" },
 @{ Name = "Certisign Desktop ID"; Url = "https://www.certisign.com.br/duvidas-suporte/downloads/desktopid" },
 @{ Name = "CNJ Corporativo"; Url = "https://www.cnj.jus.br/corporativo/" },
@@ -190,6 +190,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
