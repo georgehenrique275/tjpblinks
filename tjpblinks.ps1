@@ -82,7 +82,7 @@ $links = @(
 @{ Name = "PJE Mídias TJPB"; Url = "https://tiny.cc/PJEMidiasTJPB" },
 @{ Name = "PJE Office TRF3"; Url = "https://pjeoffice.trf3.jus.br/" },
 @{ Name = "Ditec Suporte Remoto (Tiny)"; Url = "https://tiny.cc/remototjpb" },
-@{ Name = "Ditec Suporte Remoto (Google)"; Url = "https://drive.google.com/drive/folders/1HWzavbxPwlI4-LZBTQypjWKvmIggqNEY" },
+@{ Name = "Ditec Suporte Remoto (Google)"; Url = "https://drive.usercontent.google.com/download?id=1qwGXfR88Cat76oQdQipOf_2MroCv0K_c&export=download&authuser=0&confirm=t&uuid=31fab025-40e9-4b85-8990-97450ef95f79&at=AN8xHorDGqKdX2hqXzhJzKuJIfba:1756833101125" },
 @{ Name = "Remote ID Certisign"; Url = "https://remoteidcertisign.com.br/manager/#/login" },
 @{ Name = "Reset de Senha Formulario"; Url = "https://script.google.com/a/macros/tjpb.jus.br/s/AKfycbx-ghGNC2HWZ6rCPO7eWSl-nFDwKNZyKqwuL7QPeYNZzQPgzJndBLjrxMyJH0EEoX8jjQ/exec" },
 @{ Name = "Revo Uninstall"; Url = "https://portableapps.com/redir2/?a=RevoUninstallerPortable&s=s&d=pa&f=RevoUninstallerPortable_2.5.8.paf.exe" },
@@ -192,6 +192,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
