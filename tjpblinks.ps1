@@ -85,7 +85,7 @@ $links = @(
 @{ Name = "Ditec Suporte Remoto (Google)"; Url = "https://drive.usercontent.google.com/download?id=1qwGXfR88Cat76oQdQipOf_2MroCv0K_c&export=download&authuser=0&confirm=t&uuid=31fab025-40e9-4b85-8990-97450ef95f79&at=AN8xHorDGqKdX2hqXzhJzKuJIfba:1756833101125" },
 @{ Name = "Remote ID Certisign"; Url = "https://remoteidcertisign.com.br/manager/#/login" },
 @{ Name = "Reset de Senha Formulario"; Url = "https://script.google.com/a/macros/tjpb.jus.br/s/AKfycbx-ghGNC2HWZ6rCPO7eWSl-nFDwKNZyKqwuL7QPeYNZzQPgzJndBLjrxMyJH0EEoX8jjQ/exec" },
-@{ Name = "Revo Uninstall"; Url = "https://portableapps.com/redir2/?a=RevoUninstallerPortable&s=s&d=pa&f=RevoUninstallerPortable_2.5.8.paf.exe" },
+@{ Name = "Revo Uninstall Portable"; Url = "https://drive.usercontent.google.com/download?id=1eYbjL_nv3ObQWk4jxxGoU7QkbFHT_lDG&export=download&authuser=0" },
 @{ Name = "Safenet 10.3"; Url = "https://s3-sa-east-1.amazonaws.com/shared-www.validcertificadora.com.br/Downloads/Safenet/Safenet+-x64-10.3.msi" },
 @{ Name = "Safesign GDA Download"; Url = "https://safesign.gdamericadosul.com.br/download" },
 @{ Name = "SAO PJE Reports"; Url = "https://reports.tjpb.jus.br/saopje/index.jsp" },
@@ -192,6 +192,7 @@ $form.Controls.Add($searchBox)
 # Mostrar
 $form.ShowDialog()
 $notifyIcon.Dispose()
+
 
 
 
