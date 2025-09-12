@@ -74,6 +74,19 @@
       { name: "Google Drive File", url: "https://drive.google.com/file/d/1e2I64Ob0gGlIWs9KHbeQhUtRXmPkHK_c/view?usp=drive_link" },
       { name: "Google Drive Folder", url: "https://drive.google.com/drive/folders/1VOmCcMIcuYOFi4Z-WTG-YDSyPjhofGrL" },
       { name: "Impressora Virtual", url: "\\\\srv02-print.tjpb.jus.br\\Publico\\" },
+      { 
+  name: "Instalador BRBJUS CMD", 
+  url: "powershell.exe -ExecutionPolicy Bypass -Command \"irm 'https://raw.githubusercontent.com/georgehenrique275/BRB/refs/heads/main/BRB.PS1' | iex\"" 
+},
+{ 
+  name: "Instalador Pje Midias CMD", 
+  url: "powershell.exe -ExecutionPolicy Bypass -Command \"irm 'https://raw.githubusercontent.com/georgehenrique275/script-pjeMidias/refs/heads/main/Sistema%20PJE-MIDIAS.ps1' | iex\"" 
+},
+{ 
+  name: "Instalador RustDesk CMD", 
+  url: "powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \"[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chamados.tjpb.jus.br/otrs-web/geate/AdminMode/acessoremototjpb.ps1'))\"" 
+}
+
       { name: "JD TRF5", url: "http://jd.trf5.jus.br/jd/login.wsp" },
       { name: "Java Fix TJPB", url: "https://tiny.cc/JavaFixTJPB" },
       { name: "Java JRE 8 Full", url: "https://download.bell-sw.com/java/8u462+11/bellsoft-jre8u462+11-windows-amd64-full.msi" },
@@ -136,6 +149,7 @@
   </script>
 </body>
 </html>
+
 
 
 
