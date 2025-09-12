@@ -2,60 +2,43 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TJPB Links</title>
+  <title>Central de Links</title>
   <style>
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       background: #f5f5f5;
+      padding: 20px;
     }
-    header {
-      background: #004080;
-      color: white;
-      padding: 12px;
+    h2 {
       text-align: center;
-      font-size: 20px;
     }
-    #searchBox {
-      width: 90%;
-      margin: 15px auto;
-      display: block;
+    #search {
+      width: 100%;
       padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
       font-size: 16px;
-      border: 1px solid #aaa;
-      border-radius: 8px;
     }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-    .link-btn {
-      width: 95%;
-      max-width: 500px;
-      margin: 5px 0;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #0078d7;
-      color: white;
-      font-size: 15px;
-      text-align: left;
+    .link-item {
       cursor: pointer;
-      transition: background 0.2s;
+      color: #0066cc;
+      text-decoration: underline;
+      margin: 5px 0;
+      display: block;
+      padding: 6px;
+      border-radius: 5px;
     }
-    .link-btn:hover {
-      background: #005a9e;
+    .link-item:hover {
+      background: #e0e0e0;
     }
   </style>
 </head>
 <body>
-  <header>TJPB Links</header>
-  <input type="text" id="searchBox" placeholder="Pesquisar...">
-  <div class="container" id="linksContainer"></div>
+  <h2>Central de Links</h2>
+  <input type="text" id="search" placeholder="🔍 Buscar link...">
+
+  <div id="links"></div>
 
   <script>
     const links = [
@@ -114,24 +97,29 @@
       { name: "VPN 7.4", url: "https://links.fortinet.com/forticlient/win/vpnagent" }
     ];
 
-    const container = document.getElementById("linksContainer");
-    const searchBox = document.getElementById("searchBox");
-
-    function renderLinks(filter = "") {
-      container.innerHTML = "";
-      links
-        .filter(link => link.name.toLowerCase().includes(filter.toLowerCase()))
-        .forEach(link => {
-          const btn = document.createElement("button");
-          btn.className = "link-btn";
-          btn.textContent = link.name;
-          btn.onclick = () => window.open(link.url, "_blank");
-          container.appendChild(btn);
+    // Renderiza os links
+    const container = document.getElementById("links");
+    links.forEach(link => {
+      const el = document.createElement("span");
+      el.className = "link-item";
+      el.textContent = link.name;
+      el.dataset.url = link.url;
+      el.addEventListener("click", () => {
+        navigator.clipboard.writeText(link.url).then(() => {
+          alert("✅ Link copiado: " + link.url);
         });
-    }
+      });
+      container.appendChild(el);
+    });
 
-    searchBox.addEventListener("input", () => renderLinks(searchBox.value));
-    renderLinks();
+    // Filtro de pesquisa
+    document.getElementById('search').addEventListener('keyup', function() {
+      let filter = this.value.toLowerCase();
+      document.querySelectorAll('.link-item').forEach(item => {
+        let text = item.textContent.toLowerCase();
+        item.style.display = text.includes(filter) ? "block" : "none";
+      });
+    });
   </script>
 </body>
 </html>
