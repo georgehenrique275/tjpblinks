@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TJPB Links</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      font-size: 20px;
+    }
+    #searchBox {
+      width: 90%;
+      margin: 15px auto;
+      display: block;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+    .link-btn {
+      width: 95%;
+      max-width: 500px;
+      margin: 5px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #0078d7;
+      color: white;
+      font-size: 15px;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .link-btn:hover {
+      background: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <header>TJPB Links</header>
+  <input type="text" id="searchBox" placeholder="Pesquisar...">
+  <div class="container" id="linksContainer"></div>
+
+  <script>
+    const links = [
+      { name: "Canon Support", url: "https://sg.canon/en/support/0101103903" },
+      { name: "Certisign Desktop ID", url: "https://www.certisign.com.br/duvidas-suporte/downloads/desktopid" },
+      { name: "CNJ Corporativo", url: "https://www.cnj.jus.br/corporativo/" },
+      { name: "Digitaliza Criminal TJPB", url: "https://tiny.cc/DigitalizaCriminalTJPB" },
+      { name: "Digitaliza PJE", url: "https://tiny.cc/DigitalizaPJE" },
+      { name: "Digitalizador IS TJ", url: "https://tiny.cc/DigitalizadorISTJ" },
+      { name: "DirectX 9", url: "https://tiny.cc/directx9" },
+      { name: "Epass Admin TJPB", url: "https://tiny.cc/EpassAdminTJPB" },
+      { name: "Facilitador DITEC", url: "https://tiny.cc/FacilitadorDITEC" },
+      { name: "Firefox TJPB", url: "https://tiny.cc/FirefoxTJPB" },
+      { name: "Fortinet Product Downloads", url: "https://www.fortinet.com/support/product-downloads" },
+      { name: "Google Contacts Directory", url: "https://contacts.google.com/directory" },
+      { name: "Google Drive File", url: "https://drive.google.com/file/d/1e2I64Ob0gGlIWs9KHbeQhUtRXmPkHK_c/view?usp=drive_link" },
+      { name: "Google Drive Folder", url: "https://drive.google.com/drive/folders/1VOmCcMIcuYOFi4Z-WTG-YDSyPjhofGrL" },
+      { name: "Impressora Virtual", url: "\\\\srv02-print.tjpb.jus.br\\Publico\\" },
+      { name: "Instalador BRBJUS CMD", url: "https://raw.githubusercontent.com/georgehenrique275/BRB/refs/heads/main/BRB.PS1" },
+      { name: "Instalador Pje Midias CMD", url: "https://raw.githubusercontent.com/georgehenrique275/script-pjeMidias/refs/heads/main/Sistema%20PJE-MIDIAS.ps1" },
+      { name: "Instalador RustDesk CMD", url: "https://chamados.tjpb.jus.br/otrs-web/geate/AdminMode/acessoremototjpb.ps1" },
+      { name: "JD TRF5", url: "http://jd.trf5.jus.br/jd/login.wsp" },
+      { name: "Java Fix TJPB", url: "https://tiny.cc/JavaFixTJPB" },
+      { name: "Java JRE 8 Full", url: "https://download.bell-sw.com/java/8u462+11/bellsoft-jre8u462+11-windows-amd64-full.msi" },
+      { name: "Java Portable TJPB", url: "https://tiny.cc/JavaPortableTJPB" },
+      { name: "Kodak 1xx TJPB", url: "https://tiny.cc/kodak1xxtjpb" },
+      { name: "Lexmark MX620", url: "https://tiny.cc/LexmarkMX620" },
+      { name: "LibreOffice 25.2.5", url: "https://pt-br.libreoffice.org/donate/dl/win-x86_64/25.2.5/pt-BR/LibreOffice_25.2.5_Win_x86-64.msi" },
+      { name: "Menu Admin", url: "http://tiny.cc/MenuAdminTJPBGui" },
+      { name: "Movie Maker TJPB", url: "https://tiny.cc/MovieMakerTJPB" },
+      { name: "My MP4 Box TJPB", url: "https://tiny.cc/MyMp4BoxTJPB" },
+      { name: "Netfx3 TJPB", url: "https://tiny.cc/Netfx3TJPB" },
+      { name: "PJE Mídias TJPB", url: "https://tiny.cc/PJEMidiasTJPB" },
+      { name: "PJE Office TRF3", url: "https://pjeoffice.trf3.jus.br/" },
+      { name: "Ditec Suporte Remoto (Tiny)", url: "https://tiny.cc/remototjpb" },
+      { name: "Ditec Suporte Remoto (Google)", url: "https://drive.usercontent.google.com/download?id=1qwGXfR88Cat76oQdQipOf_2MroCv0K_c" },
+      { name: "Remote ID Certisign", url: "https://remoteidcertisign.com.br/manager/#/login" },
+      { name: "Reset de Senha Formulario", url: "https://script.google.com/a/macros/tjpb.jus.br/s/AKfycbx-ghGNC2HWZ6rCPO7eWSl-nFDwKNZyKqwuL7QPeYNZzQPgzJndBLjrxMyJH0EEoX8jjQ/exec" },
+      { name: "Revo Uninstall Portable", url: "https://drive.usercontent.google.com/download?id=1eYbjL_nv3ObQWk4jxxGoU7QkbFHT_lDG" },
+      { name: "Safenet 10.3", url: "https://s3-sa-east-1.amazonaws.com/shared-www.validcertificadora.com.br/Downloads/Safenet/Safenet+-x64-10.3.msi" },
+      { name: "Safesign GDA Download", url: "https://safesign.gdamericadosul.com.br/download" },
+      { name: "SAO PJE Reports", url: "https://reports.tjpb.jus.br/saopje/index.jsp" },
+      { name: "Sistema Precatorios", url: "https://precatorios.tjpb.jus.br/guacamole/#/" },
+      { name: "Sistemas JUD", url: "https://tiny.cc/SistemasJUD" },
+      { name: "Sistema ASI Index", url: "http://10.0.1.68:8080/asi/apresentacao/IndexASI.html" },
+      { name: "Soluti Suporte A3", url: "https://soluti.com.br/duvidas-e-suporte/suporte-certificado-a3/" },
+      { name: "Status Sistemas TJPB", url: "https://statusdesistemas.tjpb.jus.br/status/sistemastjpb" },
+      { name: "STI TJPB", url: "https://tiny.cc/STITJPB" },
+      { name: "Token EPASS2003 TJPB", url: "https://tiny.cc/TokenEPASS2003TJPB" },
+      { name: "Token GD Old", url: "http://tiny.cc/TokenGDold" },
+      { name: "Token Safenet x32 TJPB", url: "https://tiny.cc/TokenSafenetx32TJPB" },
+      { name: "Token Safenet x64 TJPB", url: "https://tiny.cc/TokenSafenetx64TJPB" },
+      { name: "TJPB WIFI", url: "https://tiny.cc/TJPBWIFI" },
+      { name: "VAgent", url: "https://valid-websocket.s3.amazonaws.com/installer/VAgent-Certificadora-Cliente-Installer_x64_2.0.5.exe" },
+      { name: "VPN 7.2", url: "https://drive.google.com/file/d/1yYQAmKMkiLJ5_nBZv-hCTJUsfmhdVAsE/view?usp=sharing" },
+      { name: "VPN 7.4", url: "https://links.fortinet.com/forticlient/win/vpnagent" }
+    ];
+
+    const container = document.getElementById("linksContainer");
+    const searchBox = document.getElementById("searchBox");
+
+    function renderLinks(filter = "") {
+      container.innerHTML = "";
+      links
+        .filter(link => link.name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(link => {
+          const btn = document.createElement("button");
+          btn.className = "link-btn";
+          btn.textContent = link.name;
+          btn.onclick = () => window.open(link.url, "_blank");
+          container.appendChild(btn);
+        });
+    }
+
+    searchBox.addEventListener("input", () => renderLinks(searchBox.value));
+    renderLinks();
+  </script>
+</body>
+</html>
