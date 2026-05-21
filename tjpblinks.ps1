@@ -78,7 +78,7 @@ $links = @(
 @{ Name = "Instalador RustDesk CMD"; Url = 'powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://chamados.tjpb.jus.br/otrs-web/geate/AdminMode/acessoremototjpb.ps1''))"' },
 @{ Name = "Inventario TJPB OCS"; Url = "https://s.tjpb.jus.br/inventario-tjpb-ocs" },
 @{ Name = "Java Fix TJPB"; Url = "https://s.tjpb.jus.br/JavaFixTJPB" },
-@{ Name = "Java JRE 8 Full"; Url = "https://download.bell-sw.com/java/8u462+11/bellsoft-jre8u462+11-windows-amd64-full.msi" },
+@{ Name = "Java JRE 8 BellSoft Full"; Url = "https://download.bell-sw.com/java/8u462+11/bellsoft-jre8u462+11-windows-amd64-full.msi" },
 @{ Name = "Java Portable TJPB"; Url = "https://s.tjpb.jus.br/JavaPortableTJPB" },
 @{ Name = "JD TRF5"; Url = "http://jd.trf5.jus.br/jd/login.wsp" },
 @{ Name = "Kodak 1xx TJPB"; Url = "https://s.tjpb.jus.br/kodak1xxtjpb" },
