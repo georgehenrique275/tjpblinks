@@ -114,7 +114,7 @@ $links = @(
 @{ Name = "VAgent"; Url = "https://valid-websocket.s3.amazonaws.com/installer/VAgent-Certificadora-Cliente-Installer_x64_2.0.5.exe" },
 @{ Name = "VPN 7.2"; Url = "https://drive.usercontent.google.com/download?id=1yYQAmKMkiLJ5_nBZv-hCTJUsfmhdVAsE&export=download&authuser=0&confirm=t&uuid=83d088e8-b9e1-4568-aba6-bd351ff204f1&at=AN8xHor4hE0TgE1aNS4N-tbKSakW%3A1757680354687" },
 @{ Name = "VPN 7.4"; Url = "https://drive.usercontent.google.com/download?id=195shF7NhonYWFo--10LrLCMyBpQom_cp&export=download&authuser=0&confirm=t&uuid=28850c74-dab9-42f1-bbc2-6634985edfb5&at=ALBwUgnLV7NPCmKrhOPqGlv9MIpb:1779371762545" },
-@{ Name = "VPN Manual TJPB"; Url = "https://s.tjpb.jus.br/vpnmanualtjpb" },
+@{ Name = "VPN Manual TJPB"; Url = "https://s.tjpb.jus.br/vpnmanualtjpb" }
 
   
 )
